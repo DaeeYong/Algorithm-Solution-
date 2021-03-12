@@ -1,2 +1,3 @@
-# Algorithm-Solution-
-Solution for Algorithm Problem
+## 알고리즘 문제 풀이 ##
+
+인터넷에 있는 여러가지 사이트에서 문제를 풀고, 난이도와 관계없이 업로드 할 예정입니다.
