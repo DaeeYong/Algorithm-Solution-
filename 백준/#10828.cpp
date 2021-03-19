@@ -1,12 +1,10 @@
-#define _CRT_SECURE_NO_WARNINGS
-
 #include<stdlib.h>
 #include<cstring>
 #include<iostream>
 
 using namespace std;
 
-//¿¬°á¸®½ºÆ®·Î stack ±¸Çö
+//ì—°ê²°ë¦¬ìŠ¤íŠ¸ë¡œ stack êµ¬í˜„
 
 typedef struct _node
 {
@@ -17,14 +15,14 @@ typedef struct _node
 typedef struct _stack
 {
 	Node* head = NULL;
-	int numOfData = 0; //stack¿¡ Á¸ÀçÇÏ´Â dataÀÇ ¼ö Ç¥½Ã
+	int numOfData = 0; //stackì— ì¡´ìž¬í•˜ëŠ” dataì˜ ìˆ˜ í‘œì‹œ
 
 }Stack;
 
-//push ÇÔ¼ö
+//push í•¨ìˆ˜
 void push(Stack* pstack, int data)
 {
-	if (pstack->head == NULL) //stackÀÌ ºñ¾îÀÖ´Â °æ¿ì
+	if (pstack->head == NULL) //stackì´ ë¹„ì–´ìžˆëŠ” ê²½ìš°
 	{
 		Node* newNode = (Node*)malloc(sizeof(Node));
 		newNode->next = NULL;
@@ -32,7 +30,7 @@ void push(Stack* pstack, int data)
 		pstack->head->data = data;
 		(pstack->numOfData)++;
 	}
-	else //stackÀÌ ºñ¾îÀÖÁö ¾Ê´Â °æ¿ì¿¡ headºÎºÐ¿¡ »õ·Î¿î ³ëµå Ãß°¡
+	else //stackì´ ë¹„ì–´ìžˆì§€ ì•ŠëŠ” ê²½ìš°ì— headë¶€ë¶„ì— ìƒˆë¡œìš´ ë…¸ë“œ ì¶”ê°€
 	{
 		Node* newNode = (Node*)malloc(sizeof(Node));
 		newNode->next = NULL;
@@ -43,49 +41,49 @@ void push(Stack* pstack, int data)
 	}
 }
 
-//pop¿¬»ê
+//popì—°ì‚°
 int pop(Stack* pstack)
 {
 	Node* removeNode;
 	int removeData;
 
-	//stackÀÌ  ºñ¾îÀÖ´Â °æ¿ì -1À» ¹ÝÈ¯
+	//stackì´  ë¹„ì–´ìžˆëŠ” ê²½ìš° -1ì„ ë°˜í™˜
 	if (pstack->head == NULL) return -1;
 
-	removeNode = pstack->head; //»èÁ¦ÇÒ ³ëµå 
-	removeData = pstack->head->data; //»èÁ¦ÇÒ ³ëµåÀÇ µ¥ÀÌÅÍ
-	pstack->head = pstack->head->next; //»èÁ¦ÇÒ ³ëµåÀÇ ±× ´ÙÀ½ ³ëµå¸¦ head°¡ °¡¸®Å´.
+	removeNode = pstack->head; //ì‚­ì œí•  ë…¸ë“œ 
+	removeData = pstack->head->data; //ì‚­ì œí•  ë…¸ë“œì˜ ë°ì´í„°
+	pstack->head = pstack->head->next; //ì‚­ì œí•  ë…¸ë“œì˜ ê·¸ ë‹¤ìŒ ë…¸ë“œë¥¼ headê°€ ê°€ë¦¬í‚´.
 
-	free(removeNode); //ÇÒ´çÇØÁ¦
-	(pstack->numOfData)--; //dataÀÇ °³¼ö ÇÏ³ª °¨¼Ò
+	free(removeNode); //í• ë‹¹í•´ì œ
+	(pstack->numOfData)--; //dataì˜ ê°œìˆ˜ í•˜ë‚˜ ê°ì†Œ
 	return removeData; 
 }
 
-//stackÀÇ size ¹ÝÈ¯
+//stackì˜ size ë°˜í™˜
 int size(Stack* pstack)
 {
 	return pstack->numOfData;
 }
 
 
-//stackÀÌ ºñ¾îÀÖ´ÂÁö À¯¹« È®ÀÎ
+//stackì´ ë¹„ì–´ìžˆëŠ”ì§€ ìœ ë¬´ í™•ì¸
 int empty(Stack* pstack)
 {
-	if (pstack->head == NULL) return 1; //ºñ¾îÀÖ´Ù¸é 1 ¹ÝÈ¯
-	else return 0; //ºñ¾îÀÖÁö ¾Ê´Ù¸é 0 ¹ÝÈ¯
+	if (pstack->head == NULL) return 1; //ë¹„ì–´ìžˆë‹¤ë©´ 1 ë°˜í™˜
+	else return 0; //ë¹„ì–´ìžˆì§€ ì•Šë‹¤ë©´ 0 ë°˜í™˜
 }
 
-//stackÀÇ Á¦ÀÏ À§¿¡ ÀÖ´Â data ¹ÝÈ¯
+//stackì˜ ì œì¼ ìœ„ì— ìžˆëŠ” data ë°˜í™˜
 int top(Stack* pstack)
 {	
-	if (pstack->head == NULL) return -1; //¹ÝÈ¯ÇÒ data°¡ ¾ø´Ù¸é -1 ¸®ÅÏ
+	if (pstack->head == NULL) return -1; //ë°˜í™˜í•  dataê°€ ì—†ë‹¤ë©´ -1 ë¦¬í„´
 	else return pstack->head->data;
 }
 
 int main()
 {	
 	Stack stack;
-	stack.head = NULL; //stackÀÇ head¸¦ NULL·Î ÃÊ±âÈ­
+	stack.head = NULL; //stackì˜ headë¥¼ NULLë¡œ ì´ˆê¸°í™”
 	int N;
 	int data;
 	char str[6];
@@ -95,7 +93,7 @@ int main()
 	{
 		cin >> str;
 
-		//°¢°¢ÀÇ ÀÔ·Â °æ¿ì¿¡ µû¶ó¼­ ¾Ë¸ÂÀº ÇÔ¼ö¸¦ ½ÇÇà
+		//ê°ê°ì˜ ìž…ë ¥ ê²½ìš°ì— ë”°ë¼ì„œ ì•Œë§žì€ í•¨ìˆ˜ë¥¼ ì‹¤í–‰
 		if (!strcmp(str, "push"))
 		{	
 			cin >> data;
@@ -117,13 +115,13 @@ int main()
 		{
 			cout << top(&stack) << endl;
 		}
-		else //¿¹»ó¿ÜÀÇ ÀÔ·ÂÀ» ÇßÀ» ½Ã ¿¹¿ÜÃ³¸®
+		else //ì˜ˆìƒì™¸ì˜ ìž…ë ¥ì„ í–ˆì„ ì‹œ ì˜ˆì™¸ì²˜ë¦¬
 		{
 			printf("commend is not exist, error! \n");
 			exit(-1);
 		}
 	}
-	//È¤½Ã³ª ¸ð¸¦ ¸Þ¸ð¸® ´©¼ö¸¦ ¸·±â À§ÇØ¼­ È®½ÇÇÏ°Ô ÇÒ´ç ÇØÁ¦
+	//í˜¹ì‹œë‚˜ ëª¨ë¥¼ ë©”ëª¨ë¦¬ ëˆ„ìˆ˜ë¥¼ ë§‰ê¸° ìœ„í•´ì„œ í™•ì‹¤í•˜ê²Œ í• ë‹¹ í•´ì œ
 	while (!(stack.head == NULL))
 	{
 		Node* remove = NULL;
