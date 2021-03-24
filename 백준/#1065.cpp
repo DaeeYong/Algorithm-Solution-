@@ -1,6 +1,7 @@
 #include<stdio.h>
 
 int result(int N);
+
 int main()
 {
 	int N;
@@ -8,6 +9,7 @@ int main()
 	printf("%d\n", result(N));
 	return 0;
 }
+
 int result(int N)
 {
 	int hundred; //백의자리
