@@ -1,33 +1,39 @@
-#include<iostream>
-using namespace std;
+#include<cstdio>
+#include<cstring>
+int cache[5001];
 
-
-int Solution(int PsugarWeight)
+int min(int a, int b)
 {
-	int numOf_5_Bag = PsugarWeight / 5;
-	int tmp = 0;
+	if (a == -1) return b;
+	else if (b == -1) return a;
+	else return a < b ? a : b;
+}
 
-	if (PsugarWeight < 3) PsugarWeight = -1;
+int solve(int weight)
+{
+	cache[3] = 1;
+	cache[5] = 1;
 
-	while (numOf_5_Bag != -1)
-	{
-		tmp = PsugarWeight - (5 * numOf_5_Bag);
-		if (tmp % 3 == 0)
-		{
-			return numOf_5_Bag + (tmp / 3);
-		}
-		numOf_5_Bag--;
+	int compare;
+
+	for (int i = 6; i <= weight; i++) {
+		compare = min(cache[i - 3], cache[i - 5]);
+		if (compare == -1) cache[i] = -1;
+		else cache[i] = min(cache[i - 3], cache[i - 5]) + 1;
 	}
-	return -1;
+	
+	return cache[weight];
 }
 int main()
 {
-	int sugarWeight;
-	int numberOfBag=0;
-	cin >> sugarWeight;
-	
-	cout<<Solution(sugarWeight)<<endl;
+	memset(cache, -1, sizeof(cache));
+	int weight;
+	int result;
 
-	
+	scanf("%d", &weight);
+
+	result = solve(weight);
+	printf("%d\n", result);
+
 	return 0;
 }
