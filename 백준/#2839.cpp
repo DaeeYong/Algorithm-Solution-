@@ -1,39 +1,31 @@
-#include<cstdio>
-#include<cstring>
-int cache[5001];
+#include<iostream>
 
-int min(int a, int b)
+using namespace std;
+
+int solution(int weight)
 {
-	if (a == -1) return b;
-	else if (b == -1) return a;
-	else return a < b ? a : b;
-}
+    int numFive = weight / 5;
+    int tmp = 0;
 
-int solve(int weight)
-{
-	cache[3] = 1;
-	cache[5] = 1;
+    if (weight < 3) return -1;
 
-	int compare;
+    while (numFive != -1) {
+        tmp = weight - (5 * numFive);
 
-	for (int i = 6; i <= weight; i++) {
-		compare = min(cache[i - 3], cache[i - 5]);
-		if (compare == -1) cache[i] = -1;
-		else cache[i] = min(cache[i - 3], cache[i - 5]) + 1;
-	}
-	
-	return cache[weight];
+        if (tmp % 3 == 0) {
+            return numFive + (tmp / 3);
+        }
+        numFive -= 1;
+    }
+    return -1;
+
 }
 int main()
 {
-	memset(cache, -1, sizeof(cache));
-	int weight;
-	int result;
+    int weight;
 
-	scanf("%d", &weight);
+    cin >> weight;
+    cout << solution(weight) << endl;
 
-	result = solve(weight);
-	printf("%d\n", result);
-
-	return 0;
+    return 0;
 }
