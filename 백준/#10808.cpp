@@ -10,6 +10,7 @@ int main()
 	cin.tie(0);
 
 	cin >> arr;
+	
 	for (int i = 0; i < arr.size(); i++) {
 		alphabet[arr[i] - 97] += 1;
 	}
@@ -17,5 +18,6 @@ int main()
 	for (int i = 0; i < 26; i++) {
 		cout << alphabet[i] << ' ';
 	}
+	
 	return 0;
 }
